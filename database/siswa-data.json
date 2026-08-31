@@ -1,0 +1,304 @@
+{
+  "siswa": [
+    {
+      "nama_lengkap": "Aditya Pratama",
+      "nama_panggilan": "Adit",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Network & System Administration",
+      "skill": "Mikrotik, Debian Server, Windows Server, Troubleshooting Jaringan",
+      "minat_hobi": "Futsal, gaming, ngoprek jaringan",
+      "cita_cita": "Network Engineer di perusahaan telekomunikasi",
+      "deskripsi": "Ketua kelas yang hobi ngoprek router. Aktif di ekstrakurikuler jaringan dan rutin mengikuti lomba networking antar SMK.",
+      "foto": "siswa-01.svg"
+    },
+    {
+      "nama_lengkap": "Aisyah Putri Ramadhani",
+      "nama_panggilan": "Aisyah",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Cyber Security",
+      "skill": "Linux, Python, Analisis Kerentanan Dasar",
+      "minat_hobi": "Membaca novel, bersepeda",
+      "cita_cita": "Cyber Security Analyst",
+      "deskripsi": "Siswa paling teliti saat praktikum. Tertarik dunia keamanan siber dan bercita-cita ikut kompetisi CTF nasional.",
+      "foto": "siswa-02.svg"
+    },
+    {
+      "nama_lengkap": "Bagas Setiawan",
+      "nama_panggilan": "Bagas",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Web Development",
+      "skill": "HTML, CSS, JavaScript, React",
+      "minat_hobi": "Desain UI, fotografi",
+      "cita_cita": "Full-Stack Developer",
+      "deskripsi": "Salah satu pembuat website profil kelas ini. Senang mengubah ide menjadi tampilan web yang rapi dan interaktif.",
+      "foto": "siswa-03.svg"
+    },
+    {
+      "nama_lengkap": "Citra Ayu Lestari",
+      "nama_panggilan": "Citra",
+      "kelas": "XI TKJ 3",
+      "keahlian": "UI/UX Design",
+      "skill": "Figma, Canva, Wireframing",
+      "minat_hobi": "Menggambar digital, menonton film",
+      "cita_cita": "UI/UX Designer di startup",
+      "deskripsi": "Punya sense desain yang bagus dan sering diminta membuat poster acara kelas.",
+      "foto": "siswa-04.svg"
+    },
+    {
+      "nama_lengkap": "Dimas Ardiansyah",
+      "nama_panggilan": "Dimas",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Hardware & Troubleshooting",
+      "skill": "Perakitan PC, Soldering, Diagnosa Komponen",
+      "minat_hobi": "Modding PC, main game",
+      "cita_cita": "Teknisi komputer profesional",
+      "deskripsi": "Panggilan pertama kalau ada komputer bermasalah di lab. Bermimpi membuka jasa service center sendiri.",
+      "foto": "siswa-05.svg"
+    },
+    {
+      "nama_lengkap": "Eka Wijaya",
+      "nama_panggilan": "Eka",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Network & System Administration",
+      "skill": "VLAN, Routing, Switching, Proxmox",
+      "minat_hobi": "Sepak bola, eksplorasi virtualisasi",
+      "cita_cita": "Network Administrator",
+      "deskripsi": "Suka eksperimen virtualisasi dengan Proxmox di laptop pribadi untuk latihan deployment server.",
+      "foto": "siswa-06.svg"
+    },
+    {
+      "nama_lengkap": "Fitri Handayani",
+      "nama_panggilan": "Fitri",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Database Administration",
+      "skill": "MySQL/MariaDB, SQL Query, Normalisasi",
+      "minat_hobi": "Membaca, main puzzle",
+      "cita_cita": "Database Administrator",
+      "deskripsi": "Rajin dan sistematis. Gemar membersihkan dan merapikan data sampai terlihat rapi.",
+      "foto": "siswa-07.svg"
+    },
+    {
+      "nama_lengkap": "Fajar Nugroho",
+      "nama_panggilan": "Fajar",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Cyber Security",
+      "skill": "Kali Linux, Nmap, Pentest Dasar",
+      "minat_hobi": "CTF, gaming",
+      "cita_cita": "Penetration Tester",
+      "deskripsi": "Anggota klub siber sekolah. Hafal puluhan command Linux untuk information gathering.",
+      "foto": "siswa-08.svg"
+    },
+    {
+      "nama_lengkap": "Gita Permata Sari",
+      "nama_panggilan": "Gita",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Web Development",
+      "skill": "Tailwind CSS, React, Git",
+      "minat_hobi": "Musik, menulis jurnal",
+      "cita_cita": "Frontend Developer",
+      "deskripsi": "Detail-oriented dan suka animasi halus. Perhatian juga pada aksesibilitas tampilan web.",
+      "foto": "siswa-09.svg"
+    },
+    {
+      "nama_lengkap": "Hendra Gunawan",
+      "nama_panggilan": "Hendra",
+      "kelas": "XI TKJ 3",
+      "keahlian": "IoT & Embedded Systems",
+      "skill": "Arduino, Raspberry Pi, Sensor",
+      "minat_hobi": "Robotika, DIY elektronik",
+      "cita_cita": "IoT Engineer",
+      "deskripsi": "Pernah membuat smart home mini untuk pameran karya sekolah dan memenangkan juara 2.",
+      "foto": "siswa-10.svg"
+    },
+    {
+      "nama_lengkap": "Indah Permatasari",
+      "nama_panggilan": "Indah",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Multimedia & Content Creation",
+      "skill": "Premiere Pro, Canva, Copywriting",
+      "minat_hobi": "Video editing, vlog",
+      "cita_cita": "Content Creator",
+      "deskripsi": "Mengurus dokumentasi kegiatan kelas di media sosial. Video dokumentasinya selalu rapi.",
+      "foto": "siswa-11.svg"
+    },
+    {
+      "nama_lengkap": "Joko Prasetyo",
+      "nama_panggilan": "Joko",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Network & System Administration",
+      "skill": "Proxy, Firewall, Manajemen Bandwidth",
+      "minat_hobi": "Voli, futsal",
+      "cita_cita": "IT Support Supervisor",
+      "deskripsi": "Tenang dan sabar; ahli memecahkan masalah koneksi internet di lab komputer.",
+      "foto": "siswa-12.svg"
+    },
+    {
+      "nama_lengkap": "Kartika Sari",
+      "nama_panggilan": "Tika",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Cyber Security",
+      "skill": "Analisis Malware Dasar, Forensik Digital",
+      "minat_hobi": "Budaya Korea, belajar bahasa asing",
+      "cita_cita": "Digital Forensics Specialist",
+      "deskripsi": "Suka menonton dokumenter kejahatan siber lalu menganalisis modus dan cara pencegahannya.",
+      "foto": "siswa-13.svg"
+    },
+    {
+      "nama_lengkap": "Lutfi Hakim",
+      "nama_panggilan": "Lutfi",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Programming",
+      "skill": "Python, Automasi, Bot Telegram",
+      "minat_hobi": "Catur, coding",
+      "cita_cita": "Software Engineer",
+      "deskripsi": "Menulis script kecil untuk mempermudah hidup sehari-hari; koleksi program automasinya banyak sekali.",
+      "foto": "siswa-14.svg"
+    },
+    {
+      "nama_lengkap": "Maya Anggraini",
+      "nama_panggilan": "Maya",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Web & Database",
+      "skill": "PHP, MySQL, Bootstrap",
+      "minat_hobi": "Memasak, menonton",
+      "cita_cita": "Backend Developer",
+      "deskripsi": "Praktis dan cepat tanggap. Gemar membuat aplikasi CRUD sederhana untuk latihan.",
+      "foto": "siswa-15.svg"
+    },
+    {
+      "nama_lengkap": "Naufal Arifin",
+      "nama_panggilan": "Naufal",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Hardware & Troubleshooting",
+      "skill": "Perbaikan Laptop, Data Recovery",
+      "minat_hobi": "Otomotif, gadget",
+      "cita_cita": "Membuka jasa service laptop",
+      "deskripsi": "Punya pengalaman magang di toko service dan paham pentingnya menjaga keamanan data pelanggan.",
+      "foto": "siswa-16.svg"
+    },
+    {
+      "nama_lengkap": "Oktaviani Dwi Lestari",
+      "nama_panggilan": "Viani",
+      "kelas": "XI TKJ 3",
+      "keahlian": "UI/UX Design",
+      "skill": "Figma, Prototyping, Design System",
+      "minat_hobi": "Desain grafis, K-pop",
+      "cita_cita": "Product Designer",
+      "deskripsi": "Punya portofolio desain aplikasi sekolah yang rapi dan terstruktur.",
+      "foto": "siswa-17.svg"
+    },
+    {
+      "nama_lengkap": "Putra Ramadhan",
+      "nama_panggilan": "Putra",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Network & System Administration",
+      "skill": "Virtualisasi, Linux Server, Docker Dasar",
+      "minat_hobi": "E-sport, komunitas komputer",
+      "cita_cita": "DevOps Engineer",
+      "deskripsi": "Suka belajar deployment aplikasi di server pribadi dan dokumentasikan prosesnya.",
+      "foto": "siswa-18.svg"
+    },
+    {
+      "nama_lengkap": "Qonita Zahra",
+      "nama_panggilan": "Nita",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Web Development",
+      "skill": "WordPress, PHP, SEO",
+      "minat_hobi": "Menulis blog, membaca",
+      "cita_cita": "Web developer freelance",
+      "deskripsi": "Sudah menerima jasa pembuatan website UMKM secara kecil-kecilan sejak kelas X.",
+      "foto": "siswa-19.svg"
+    },
+    {
+      "nama_lengkap": "Rizky Maulana",
+      "nama_panggilan": "Rizky",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Cyber Security",
+      "skill": "Ethical Hacking, Jaringan, Analisis Log",
+      "minat_hobi": "E-sport, komunitas komputer",
+      "cita_cita": "Security Engineer",
+      "deskripsi": "Tertarik jalur blue team; gemar membaca laporan insiden keamanan dan cara responsnya.",
+      "foto": "siswa-20.svg"
+    },
+    {
+      "nama_lengkap": "Salsabila Zahra",
+      "nama_panggilan": "Salsa",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Multimedia & Animation",
+      "skill": "After Effects, Illustrator, Motion Graphics",
+      "minat_hobi": "Seni visual, anime",
+      "cita_cita": "Motion Designer",
+      "deskripsi": "Karya animasinya sering dipakai sebagai pembuka acara penting di sekolah.",
+      "foto": "siswa-21.svg"
+    },
+    {
+      "nama_lengkap": "Taufik Hidayat",
+      "nama_panggilan": "Taufik",
+      "kelas": "XI TKJ 3",
+      "keahlian": "IoT & Embedded Systems",
+      "skill": "Mikrokontroler, Smart Home, Desain PCB",
+      "minat_hobi": "DIY elektronik",
+      "cita_cita": "Engineer di perusahaan teknologi",
+      "deskripsi": "Bermimpi membuat produk IoT buatan sendiri yang dipakai banyak orang.",
+      "foto": "siswa-22.svg"
+    },
+    {
+      "nama_lengkap": "Umi Kalsum",
+      "nama_panggilan": "Umi",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Programming & Data",
+      "skill": "JavaScript, Python, Excel Lanjutan",
+      "minat_hobi": "Matematika, teka-teki logika",
+      "cita_cita": "Data Analyst",
+      "deskripsi": "Teliti dengan angka dan grafik; suka membuat dashboard sederhana dari data sekolah.",
+      "foto": "siswa-23.svg"
+    },
+    {
+      "nama_lengkap": "Vino Aditya",
+      "nama_panggilan": "Vino",
+      "kelas": "XI TKJ 3",
+      "keahlian": "Network & System Administration",
+      "skill": "Kabeling & Crimping, LAN/WAN, Wi-Fi Setup",
+      "minat_hobi": "Basket, traveling",
+      "cita_cita": "Teknisi jaringan profesional",
+      "deskripsi": "Paling cepat merapikan patch panel lab komputer; teliti, teratur, dan tidak mudah menyerah.",
+      "foto": "siswa-24.svg"
+    }
+  ],
+  "komentar": [
+    {
+      "nama_lengkap": "Aditya Pratama",
+      "penulis": "Bu Sari",
+      "isi": "Mantap Adit, konfigurasi Mikrotiknya rapi sekali. Pertahankan!"
+    },
+    {
+      "nama_lengkap": "Aditya Pratama",
+      "penulis": "Rizky Maulana",
+      "isi": "Nanti ajarin setting hotspot ya Adit!"
+    },
+    {
+      "nama_lengkap": "Bagas Setiawan",
+      "penulis": "Gita Permata Sari",
+      "isi": "Wah websitenya keren Bagas, kombinasi warnanya enak dilihat!"
+    },
+    {
+      "nama_lengkap": "Fajar Nugroho",
+      "penulis": "Aisyah Putri",
+      "isi": "Ayo ikut CTF bareng minggu depan!"
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "nama": "Pak Budi (Wali Kelas)",
+      "role": "admin"
+    },
+    {
+      "username": "guru.tkj",
+      "password": "guru456",
+      "nama": "Bu Sari (Guru Produktif)",
+      "role": "guru"
+    }
+  ]
+}

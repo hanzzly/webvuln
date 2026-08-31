@@ -4,20 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:aman": "cross-env SECURE_MODE=1 next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "start:aman": "cross-env SECURE_MODE=1 next start",
+    "lint": "eslint",
+    "db:init": "node --env-file-if-exists=.env scripts/db-init.mjs",
+    "foto": "node scripts/generate-photos.mjs"
   },
   "dependencies": {
+    "mysql2": "^3.24.2",
+    "next": "15.5.24",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.24"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.24",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4"
   }
 }
