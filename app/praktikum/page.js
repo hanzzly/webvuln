@@ -1,31 +1,33 @@
 import Link from "next/link";
-import { SECURE_MODE } from "@/lib/config";
+import { KELAS, SECURE_MODE } from "@/lib/config";
 
 export const metadata = {
-  title: "Praktikum Keamanan Web — XI TKJ 3",
+  title: "Praktikum Keamanan Web",
 };
 
 function Code({ children }) {
   return (
-    <pre className="mt-3 overflow-x-auto rounded-xl border border-slate-800 bg-slate-950 p-4 font-mono text-xs leading-relaxed text-slate-300">
+    <pre className="mt-3 overflow-x-auto rounded-lg border border-slate-800 bg-slate-950 p-4 font-mono text-xs leading-relaxed text-slate-200">
       {children}
     </pre>
   );
 }
 
-function Bagian({ id, nomor, judul, ikon, children }) {
+function Bagian({ id, nomor, judul, children }) {
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8"
+      className="scroll-mt-24 rounded-xl border border-slate-200 bg-white p-6 sm:p-8"
     >
-      <h2 className="flex items-center gap-3 text-2xl font-bold text-slate-100">
-        <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 text-lg">
-          {ikon}
+      <h2 className="flex items-center gap-3 text-xl font-bold text-slate-950 sm:text-2xl">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-blue-100 bg-blue-50 text-sm font-bold text-blue-700">
+          {nomor}
         </span>
-        {nomor}. {judul}
+        {judul}
       </h2>
-      <div className="mt-5 space-y-5 text-slate-300">{children}</div>
+      <div className="mt-6 space-y-6 text-slate-600 [&_b]:font-semibold [&_b]:text-slate-800 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-slate-800">
+        {children}
+      </div>
     </section>
   );
 }
@@ -33,52 +35,98 @@ function Bagian({ id, nomor, judul, ikon, children }) {
 function Sub({ judul, children }) {
   return (
     <div>
-      <h3 className="text-sm font-bold uppercase tracking-wider text-cyan-400">{judul}</h3>
-      <div className="mt-2 leading-relaxed text-slate-300">{children}</div>
+      <h3 className="text-sm font-bold text-slate-900">{judul}</h3>
+      <div className="mt-2 leading-7 text-slate-600">{children}</div>
     </div>
   );
 }
 
 export default function HalamanPraktikum() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <header>
-        <h1 className="text-4xl font-extrabold text-slate-100">
-          🛡️ Praktikum <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Keamanan Web</span>
-        </h1>
-        <p className="mt-3 leading-relaxed text-slate-400">
-          Website profil {`kelas XI TKJ 3`} ini sekaligus menjadi laboratorium keamanan aplikasi
-          web. Pada <b>MODE RENTAN</b>, tiga fitur sengaja dibuat memiliki kelemahan umum agar bisa
-          ditemukan, dianalisis, lalu diperbaiki. Dokumentasi lengkap tersedia di file{" "}
-          <code className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-xs">
-            docs/ANALISIS-KEAMANAN.md
-          </code>{" "}
-          dan <code className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-xs">docs/PANDUAN-PRAKTIKUM.md</code>.
-        </p>
-
-        {SECURE_MODE ? (
-          <p className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-300">
-            🔒 Saat ini aplikasi berjalan dalam <b>MODE AMAN</b> — semua perbaikan aktif. Ubah{" "}
-            <code className="font-mono">SECURE_MODE=0</code> di file <code className="font-mono">.env</code>{" "}
-            lalu restart server untuk kembali ke versi rentan dan mencoba serangannya.
+    <div className="page-shell py-10 sm:py-14">
+      <div className="mx-auto max-w-4xl">
+        <header className="max-w-3xl">
+          <p className="eyebrow">Panduan pembelajaran</p>
+          <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+            Praktikum Keamanan Web
+          </h1>
+          <p className="mt-4 leading-7 text-slate-600">
+            Website profil kelas {KELAS} ini sekaligus menjadi laboratorium keamanan aplikasi web.
+            Pada <b>MODE RENTAN</b>, tiga fitur sengaja dibuat memiliki kelemahan umum agar bisa
+            ditemukan, dianalisis, lalu diperbaiki. Dokumentasi lengkap tersedia di file{" "}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-slate-800">
+              docs/ANALISIS-KEAMANAN.md
+            </code>{" "}
+            dan{" "}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-slate-800">
+              docs/PANDUAN-PRAKTIKUM.md
+            </code>
+            .
           </p>
-        ) : (
-          <p className="mt-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-300">
-            ⚠️ Saat ini aplikasi berjalan dalam <b>MODE RENTAN</b> — serangan di bawah ini bisa
-            langsung dicoba. Ubah <code className="font-mono">SECURE_MODE=1</code> di file{" "}
-            <code className="font-mono">.env</code> lalu restart server untuk mengaktifkan versi
-            yang sudah diperbaiki.
-          </p>
-        )}
-      </header>
 
-      <div id="mengganti-mode" className="mt-10 scroll-mt-24 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-        <h2 className="text-xl font-bold text-slate-100">🔄 Mengganti Mode Rentan ⇄ Aman</h2>
-        <p className="mt-2 text-sm leading-relaxed text-slate-400">
-          Kedua versi ada dalam satu codebase. Perbedaannya dikendalikan environment variable{" "}
-          <code className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-xs">SECURE_MODE</code>:
-        </p>
-        <Code>{`# Versi RENTAN (praktikum) — default
+          {SECURE_MODE ? (
+            <p className="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm leading-6 text-emerald-900">
+              <b>Mode aman sedang aktif.</b> Semua perbaikan telah diterapkan. Ubah{" "}
+              <code className="font-mono">SECURE_MODE=0</code> di file{" "}
+              <code className="font-mono">.env</code> lalu restart server untuk kembali ke versi
+              rentan dan mencoba serangannya.
+            </p>
+          ) : (
+            <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+              <b>Mode rentan sedang aktif.</b> Serangan di bawah ini bisa langsung dicoba pada
+              lingkungan lokal. Ubah <code className="font-mono">SECURE_MODE=1</code> di file{" "}
+              <code className="font-mono">.env</code> lalu restart server untuk mengaktifkan versi
+              yang sudah diperbaiki.
+            </p>
+          )}
+        </header>
+
+        <nav
+          aria-label="Daftar isi praktikum"
+          className="mt-8 rounded-xl border border-slate-200 bg-white p-5"
+        >
+          <h2 className="text-sm font-bold text-slate-900">Daftar isi</h2>
+          <div className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+            <Link
+              href="#mengganti-mode"
+              className="rounded-md bg-slate-50 px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-100"
+            >
+              Mengganti mode
+            </Link>
+            <Link
+              href="#a-sql-injection"
+              className="rounded-md bg-slate-50 px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-100"
+            >
+              A. SQL Injection
+            </Link>
+            <Link
+              href="#b-cross-site-scripting-xss"
+              className="rounded-md bg-slate-50 px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-100"
+            >
+              B. Cross-Site Scripting
+            </Link>
+            <Link
+              href="#c-path-traversal"
+              className="rounded-md bg-slate-50 px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-100"
+            >
+              C. Path Traversal
+            </Link>
+          </div>
+        </nav>
+
+        <section
+          id="mengganti-mode"
+          className="mt-8 scroll-mt-24 rounded-xl border border-slate-200 bg-white p-6"
+        >
+          <h2 className="text-xl font-bold text-slate-950">Mengganti Mode Rentan dan Aman</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Kedua versi ada dalam satu codebase. Perbedaannya dikendalikan environment variable{" "}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-slate-800">
+              SECURE_MODE
+            </code>
+            :
+          </p>
+          <Code>{`# Versi RENTAN (praktikum) — default
 npm run dev
 
 # Versi AMAN (sudah diperbaiki)
@@ -88,11 +136,11 @@ npm run dev:aman
 SECURE_MODE=0   # rentan
 SECURE_MODE=1   # aman
 # lalu restart server`}</Code>
-      </div>
+        </section>
 
       <div className="mt-8 space-y-8">
         {/* ============ A. SQL INJECTION ============ */}
-        <Bagian id="a-sql-injection" nomor="A" judul="SQL Injection" ikon="🗄️">
+        <Bagian id="a-sql-injection" nomor="A" judul="SQL Injection">
           <Sub judul="Lokasi kerentanan">
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>
@@ -159,7 +207,7 @@ const [rows] = await pool.execute(
         </Bagian>
 
         {/* ============ B. XSS ============ */}
-        <Bagian id="b-cross-site-scripting-xss" nomor="B" judul="Cross-Site Scripting (XSS)" ikon="🧨">
+        <Bagian id="b-cross-site-scripting-xss" nomor="B" judul="Cross-Site Scripting (XSS)">
           <Sub judul="Lokasi kerentanan">
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>
@@ -228,7 +276,7 @@ await pool.execute("INSERT INTO komentar ... VALUES (?, ?, ?)", [id, nama, tanpa
         </Bagian>
 
         {/* ============ C. PATH TRAVERSAL ============ */}
-        <Bagian id="c-path-traversal" nomor="C" judul="Path Traversal" ikon="📂">
+        <Bagian id="c-path-traversal" nomor="C" judul="Path Traversal">
           <Sub judul="Lokasi kerentanan">
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>
@@ -301,11 +349,12 @@ const data = await fs.readFile(resolved);`}</Code>
         </Bagian>
       </div>
 
-      <footer className="mt-12 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 p-6 text-sm leading-relaxed text-slate-300">
-        <b className="text-cyan-400">Catatan etika:</b> aplikasi ini hanya untuk latihan di lingkungan
+      <aside className="mt-10 rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm leading-6 text-slate-700">
+        <b className="text-blue-900">Catatan etika:</b> aplikasi ini hanya untuk latihan di lingkungan
         lokal (localhost) milik kelompok sendiri. Menguji kerentanan pada sistem orang lain tanpa
         izin adalah tindakan ilegal dan melanggar hukum (UU ITE).
-      </footer>
+      </aside>
+      </div>
     </div>
   );
 }

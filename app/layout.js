@@ -1,39 +1,33 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { KELAS, SCHOOL_NAME } from "@/lib/config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
-  title: "XI TKJ 3 — Student Profile & Class Portfolio",
+  title: {
+    default: "XI TKJ 3 — Profil Kelas",
+    template: "%s | XI TKJ 3",
+  },
   description:
-    "Website profil kelas XI TKJ 3: daftar siswa, keahlian, minat, dan laboratorium praktikum keamanan aplikasi web (SQL Injection, XSS, Path Traversal).",
+    "Profil digital kelas XI TKJ 3 yang memuat daftar siswa, keahlian, minat, dan praktikum keamanan aplikasi web.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-200 min-h-screen flex flex-col`}
-      >
+      <body className="flex min-h-screen flex-col antialiased">
+        <a href="#konten-utama" className="skip-link">
+          Lewati ke konten utama
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-slate-800/80 py-6">
-          <div className="mx-auto max-w-6xl px-4 text-center text-sm text-slate-500">
-            <p className="font-semibold text-slate-400">
-              {KELAS} — {SCHOOL_NAME}
-            </p>
-            <p className="mt-1">
-              Media praktikum keamanan aplikasi web: SQL Injection • XSS • Path Traversal
+        <main id="konten-utama" className="flex-1">{children}</main>
+        <footer className="mt-16 border-t border-slate-200 bg-white py-8">
+          <div className="page-shell flex flex-col gap-2 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold text-slate-800">{KELAS}</p>
+              <p className="mt-0.5">{SCHOOL_NAME}</p>
+            </div>
+            <p className="max-w-md sm:text-right">
+              Profil kelas dan media belajar keamanan aplikasi web.
             </p>
           </div>
         </footer>

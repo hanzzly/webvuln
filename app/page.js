@@ -7,21 +7,21 @@ export const dynamic = "force-dynamic";
 
 const KERENTANAN = [
   {
-    ikon: "🗄️",
+    nomor: "01",
     nama: "SQL Injection",
-    ringkas: "Input pencarian digabung langsung ke query SQL.",
+    ringkas: "Mempelajari keamanan input pada pencarian dan query database.",
     href: "/praktikum#a-sql-injection",
   },
   {
-    ikon: "🧨",
+    nomor: "02",
     nama: "Cross-Site Scripting (XSS)",
-    ringkas: "Komentar ditampilkan kembali tanpa sanitasi.",
+    ringkas: "Menguji validasi, sanitasi, dan output pada fitur komentar.",
     href: "/praktikum#b-cross-site-scripting-xss",
   },
   {
-    ikon: "📂",
+    nomor: "03",
     nama: "Path Traversal",
-    ringkas: "Penyaji foto menerima nama file tanpa pembatasan.",
+    ringkas: "Memahami pembatasan direktori saat aplikasi menyajikan berkas.",
     href: "/praktikum#c-path-traversal",
   },
 ];
@@ -36,105 +36,145 @@ export default async function Beranda() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      {/* HERO */}
-      <section className="grid items-center gap-10 lg:grid-cols-2">
-        <div>
-          <span className="inline-block rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-cyan-400">
-            {SCHOOL_NAME}
-          </span>
-          <h1 className="mt-4 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-6xl font-extrabold tracking-tight text-transparent sm:text-7xl">
-            {KELAS}
+    <div className="page-shell py-10 sm:py-14">
+      <section className="grid items-center gap-9 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
+        <div className="max-w-xl">
+          <p className="eyebrow">Profil kelas</p>
+          <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            Selamat datang di kelas {KELAS}
           </h1>
-          <p className="mt-2 text-xl font-semibold text-slate-300">
+          <p className="mt-4 text-base font-semibold text-blue-700">
             Student Profile &amp; Class Portfolio
           </p>
-          <p className="mt-4 max-w-xl leading-relaxed text-slate-400">{DESKRIPSI_KELAS}</p>
+          <p className="mt-3 leading-7 text-slate-600">{DESKRIPSI_KELAS}</p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/siswa"
-              className="rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-900/40 transition hover:from-cyan-500 hover:to-blue-500"
+              className="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
             >
-              👥 Lihat Daftar Siswa
+              Lihat daftar siswa
             </Link>
             <Link
               href="/praktikum"
-              className="rounded-xl border border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 transition hover:border-cyan-600 hover:text-white"
+              className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
             >
-              🛡️ Halaman Praktikum
+              Buka praktikum
             </Link>
           </div>
 
-          {/* STATISTIK (data dinamis dari MariaDB) */}
-          <div className="mt-8 grid grid-cols-3 gap-3 sm:max-w-md">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 text-center">
-              <p className="text-3xl font-extrabold text-cyan-400">{jumlahSiswa}</p>
-              <p className="mt-1 text-xs text-slate-400">Siswa</p>
+          <dl className="mt-9 grid max-w-lg grid-cols-3 border-y border-slate-200 py-4">
+            <div className="flex flex-col pr-3">
+              <dt className="order-2 mt-0.5 text-xs text-slate-500">Siswa</dt>
+              <dd className="order-1 text-2xl font-bold text-slate-950">{jumlahSiswa}</dd>
             </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 text-center">
-              <p className="text-3xl font-extrabold text-sky-400">{jumlahKeahlian}</p>
-              <p className="mt-1 text-xs text-slate-400">Bidang Keahlian</p>
+            <div className="flex flex-col border-l border-slate-200 px-4">
+              <dt className="order-2 mt-0.5 text-xs text-slate-500">Bidang keahlian</dt>
+              <dd className="order-1 text-2xl font-bold text-slate-950">{jumlahKeahlian}</dd>
             </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 text-center">
-              <p className="text-3xl font-extrabold text-blue-400">3</p>
-              <p className="mt-1 text-xs text-slate-400">Kerentanan Dipelajari</p>
+            <div className="flex flex-col border-l border-slate-200 pl-4">
+              <dt className="order-2 mt-0.5 text-xs text-slate-500">Materi keamanan</dt>
+              <dd className="order-1 text-2xl font-bold text-slate-950">3</dd>
             </div>
-          </div>
+          </dl>
         </div>
 
-        {/* FOTO KELAS (disajikan lewat /api/foto — sama seperti foto siswa) */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-3 shadow-2xl">
+        <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 card-shadow">
           <img
             src="/api/foto?file=foto-kelas.svg"
             alt={`Foto kelas ${KELAS}`}
             width={1200}
             height={640}
-            className="w-full rounded-2xl"
+            className="aspect-[16/9] w-full rounded-xl object-cover"
           />
-          <p className="px-3 py-3 text-center text-sm text-slate-400">
-            📸 Keluarga besar {KELAS} — {SCHOOL_NAME}
+          <figcaption className="flex items-center justify-between gap-4 px-3 py-3 text-sm">
+            <span className="font-medium text-slate-700">Keluarga besar {KELAS}</span>
+            <span className="text-right text-slate-500">{SCHOOL_NAME}</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section className="mt-16 grid gap-6 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 lg:grid-cols-[0.35fr_0.65fr] lg:gap-12">
+        <div>
+          <p className="eyebrow">Tentang kami</p>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-950">
+            Belajar dan berkembang bersama
+          </h2>
+        </div>
+        <div>
+          <p className="leading-7 text-slate-600">
+            {KELAS} adalah kelas Teknik Komputer &amp; Jaringan yang beranggotakan {jumlahSiswa} siswa.
+            Kami mempelajari administrasi jaringan dan server, keamanan siber, pengembangan web,
+            perangkat keras, serta Internet of Things.
           </p>
+          <p className="mt-3 leading-7 text-slate-600">
+            Website ini menjadi profil kelas sekaligus laboratorium keamanan aplikasi web. Melalui
+            mode praktikum, siswa dapat memahami cara menemukan dan memperbaiki kerentanan secara
+            langsung.
+          </p>
+          {!SECURE_MODE && (
+            <div className="mt-5 flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+              <span
+                aria-hidden="true"
+                className="mt-1 h-2 w-2 shrink-0 rounded-full bg-amber-500"
+              />
+              <p>
+                Aplikasi sedang berjalan dalam <strong>mode rentan</strong> untuk praktikum lokal.
+                Lihat{" "}
+                <Link
+                  href="/praktikum#mengganti-mode"
+                  className="font-semibold underline underline-offset-2"
+                >
+                  panduan mengganti mode
+                </Link>{" "}
+                sebelum memublikasikan website.
+              </p>
+            </div>
+          )}
+          {SECURE_MODE && (
+            <div className="mt-5 flex gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+              <span
+                aria-hidden="true"
+                className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-500"
+              />
+              <p>
+                Aplikasi berjalan dalam <strong>mode aman</strong>. Validasi dan perlindungan input
+                untuk seluruh materi praktikum sedang aktif.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* TENTANG KELAS */}
-      <section className="mt-16 rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
-        <h2 className="text-2xl font-bold text-slate-100">Tentang Kelas</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-slate-400">
-          {KELAS} adalah kelas Teknik Komputer &amp; Jaringan yang beranggotakan {jumlahSiswa} siswa
-          dengan berbagai bidang keahlian — mulai dari administrasi jaringan &amp; server, keamanan
-          siber, pengembangan web, perangkat keras, hingga IoT. Website ini juga berperan sebagai{" "}
-          <b className="text-slate-300">laboratorium keamanan aplikasi web</b>: pada mode praktikum,
-          beberapa fiturnya sengaja dibuat rentan agar cara kerja dan perbaikan SQL Injection, XSS,
-          dan Path Traversal dapat dipelajari langsung.
-        </p>
-        {!SECURE_MODE && (
-          <p className="mt-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-sm text-rose-300">
-            ⚠️ Aplikasi sedang berjalan dalam <b>MODE RENTAN</b> (versi praktikum). Ganti ke{" "}
-            <b>MODE AMAN</b> dengan <code className="font-mono">SECURE_MODE=1</code> — lihat{" "}
-            <Link href="/praktikum#mengganti-mode" className="underline">
-              panduan
-            </Link>
-            .
-          </p>
-        )}
-      </section>
+      <section className="mt-16">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow">Praktikum</p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-950">
+              Materi keamanan web
+            </h2>
+            <p className="mt-2 max-w-2xl text-slate-600">
+              Tiga studi kasus yang dianalisis dari versi rentan hingga versi yang telah diperbaiki.
+            </p>
+          </div>
+          <Link href="/praktikum" className="text-sm font-semibold text-blue-700 hover:text-blue-900">
+            Lihat panduan lengkap <span aria-hidden="true">→</span>
+          </Link>
+        </div>
 
-      {/* KERENTANAN */}
-      <section className="mt-14">
-        <h2 className="text-2xl font-bold text-slate-100">Praktikum Keamanan Web</h2>
-        <p className="mt-2 text-slate-400">Tiga kerentanan yang dipelajari di website ini:</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {KERENTANAN.map((k) => (
+        <div className="mt-6 grid overflow-hidden rounded-2xl border border-slate-200 bg-white sm:grid-cols-3">
+          {KERENTANAN.map((k, index) => (
             <Link
               key={k.nama}
               href={k.href}
-              className="group rounded-2xl border border-slate-800 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-cyan-600/60"
+              className={`group p-6 transition-colors hover:bg-slate-50 ${index > 0 ? "border-t border-slate-200 sm:border-l sm:border-t-0" : ""}`}
             >
-              <p className="text-4xl">{k.ikon}</p>
-              <h3 className="mt-3 font-bold text-slate-100 group-hover:text-cyan-400">{k.nama}</h3>
-              <p className="mt-1 text-sm text-slate-400">{k.ringkas}</p>
+              <span className="text-xs font-bold tracking-widest text-blue-700">{k.nomor}</span>
+              <h3 className="mt-4 font-bold text-slate-900 group-hover:text-blue-800">{k.nama}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{k.ringkas}</p>
+              <span className="mt-5 inline-block text-sm font-semibold text-slate-700">
+                Pelajari materi <span aria-hidden="true">→</span>
+              </span>
             </Link>
           ))}
         </div>

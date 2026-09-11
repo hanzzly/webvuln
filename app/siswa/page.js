@@ -6,7 +6,7 @@ import { SECURE_MODE, KELAS } from "@/lib/config";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Daftar Siswa — XI TKJ 3",
+  title: "Daftar Siswa",
 };
 
 export default async function DaftarSiswa({ searchParams }) {
@@ -23,92 +23,110 @@ export default async function DaftarSiswa({ searchParams }) {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <header className="text-center">
-        <h1 className="text-4xl font-extrabold text-slate-100">
-          👥 Daftar <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Siswa</span>
+    <div className="page-shell py-10 sm:py-14">
+      <header className="max-w-2xl">
+        <p className="eyebrow">Anggota kelas</p>
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+          Daftar Siswa
         </h1>
-        <p className="mt-2 text-slate-400">
-          Kenali siswa-siswa {KELAS}: keahlian, minat, dan profil lengkapnya.
+        <p className="mt-3 leading-7 text-slate-600">
+          Kenali siswa-siswa {KELAS} beserta keahlian, minat, dan profil lengkap mereka.
         </p>
       </header>
 
       {/* FITUR PENCARIAN — permukaan serangan SQL Injection */}
-      <section className="mx-auto mt-8 max-w-2xl">
-        <form action="/siswa" method="GET" className="flex gap-2">
-          <input
-            type="text"
-            name="q"
-            defaultValue={kata}
-            placeholder="Cari nama siswa…"
-            className="flex-1 rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder-slate-500 outline-none transition focus:border-cyan-500"
-          />
-          <button
-            type="submit"
-            className="rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-3 font-semibold text-white transition hover:from-cyan-500 hover:to-blue-500"
-          >
-            🔍 Search
-          </button>
+      <section aria-labelledby="judul-pencarian" className="mt-8 max-w-3xl">
+        <h2 id="judul-pencarian" className="sr-only">Pencarian siswa</h2>
+        <form
+          action="/siswa"
+          method="GET"
+          className="rounded-xl border border-slate-200 bg-white p-4 card-shadow"
+        >
+          <label htmlFor="cari-siswa" className="text-sm font-semibold text-slate-800">
+            Cari siswa berdasarkan nama
+          </label>
+          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+            <input
+              id="cari-siswa"
+              type="search"
+              name="q"
+              defaultValue={kata}
+              placeholder="Cari nama siswa…"
+              className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            />
+            <button
+              type="submit"
+              className="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
+            >
+              Search
+            </button>
+          </div>
         </form>
 
         {SECURE_MODE ? (
-          <p className="mt-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3 text-center text-xs text-emerald-300">
-            🔒 Pencarian aman: <b>parameterized query / prepared statement</b> — kata kunci hanya
-            diproses sebagai data, tidak bisa memanipulasi SQL.
-          </p>
+          <div className="mt-3 flex gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900">
+            <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+            <p>
+              <strong>Pencarian aman:</strong> parameterized query / prepared statement memproses
+              kata kunci sebagai data sehingga tidak dapat memanipulasi SQL.
+            </p>
+          </div>
         ) : (
-          <p className="mt-3 rounded-xl border border-rose-500/40 bg-rose-500/10 p-3 text-center text-xs text-rose-300">
-            ⚠️ <b>Mode praktikum:</b> kata kunci pencarian digabung langsung ke query SQL. Coba
-            isi dengan <code className="font-mono">&apos; OR 1=1 -- -</code> untuk melihat SQL
-            Injection (detail:{" "}
-            <Link href="/praktikum#a-sql-injection" className="underline">
-              halaman praktikum
-            </Link>
-            ).
-          </p>
+          <div className="mt-3 flex gap-2.5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-950">
+            <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+            <p>
+              <strong>Mode praktikum:</strong> kata kunci digabung langsung ke query SQL. Coba{" "}
+              <code className="rounded bg-white px-1 font-mono">&apos; OR 1=1 -- -</code> untuk
+              melihat SQL Injection. Baca penjelasan di{" "}
+              <Link href="/praktikum#a-sql-injection" className="font-semibold underline underline-offset-2">
+                halaman praktikum
+              </Link>
+              .
+            </p>
+          </div>
         )}
       </section>
 
       {/* HASIL */}
-      <section className="mt-10">
+      <section aria-labelledby="judul-hasil" className="mt-10">
+        <h2 id="judul-hasil" className="sr-only">Hasil pencarian</h2>
         {!error && (
-          <p className="mb-6 text-sm text-slate-400">
+          <p className="mb-5 text-sm text-slate-600">
             {kata ? (
               <>
-                Hasil pencarian untuk{" "}
-                <b className="text-slate-200">&ldquo;{kata}&rdquo;</b>: {hasil.length} siswa ditemukan.
+                Hasil untuk <strong className="text-slate-900">&ldquo;{kata}&rdquo;</strong> · {hasil.length} siswa
               </>
             ) : (
-              <>Menampilkan semua siswa ({hasil.length} orang).</>
+              <>Menampilkan semua siswa · {hasil.length} orang</>
             )}
           </p>
         )}
 
         {error &&
           (SECURE_MODE ? (
-            <p className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-6 text-center text-rose-300">
+            <p className="rounded-lg border border-red-200 bg-red-50 p-5 text-sm text-red-800">
               Terjadi kesalahan pada server. Coba kata kunci lain.
             </p>
           ) : (
             /* ⚠️ Mode rentan: pesan error database ditampilkan — contoh nyata
                kebocoran informasi yang membantu serangan error-based SQLi. */
-            <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-6">
-              <p className="font-semibold text-rose-300">
-                ⚠️ Query database gagal (detail error ikut ditampilkan di mode praktikum):
+            <div className="rounded-lg border border-red-200 bg-red-50 p-5">
+              <p className="text-sm font-semibold text-red-900">
+                Query database gagal. Detail error ditampilkan karena mode praktikum aktif:
               </p>
-              <pre className="mt-2 overflow-x-auto whitespace-pre-wrap break-all rounded-xl bg-slate-950 p-4 font-mono text-xs text-rose-200">
+              <pre className="mt-3 overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-slate-900 p-4 font-mono text-xs leading-5 text-red-100">
                 {error.message}
               </pre>
             </div>
           ))}
 
         {!error && hasil.length === 0 && (
-          <p className="rounded-2xl border border-slate-800 bg-slate-900 p-10 text-center text-slate-400">
-            Tidak ada siswa yang cocok dengan kata kunci <b>{kata}</b>.
+          <p className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-600">
+            Tidak ada siswa yang cocok dengan kata kunci <strong>{kata}</strong>.
           </p>
         )}
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {hasil.map((s) => (
             <StudentCard key={s.id} s={s} />
           ))}
