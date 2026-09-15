@@ -7,6 +7,7 @@ const LINKS = [
   ["Tentang", "#tentang"],
   ["Program", "#program"],
   ["Kegiatan", "#kegiatan"],
+  ["Siswa", "/siswa"],
   ["FAQ", "#faq"],
 ];
 
@@ -43,7 +44,7 @@ export default function Navbar() {
             <span /><span /><span />
           </button>
           <div id="nav-links" className={`nav-links ${open ? "open" : ""}`}>
-            {LINKS.map(([label, href]) => <Link href={`/${href}`} key={label} onClick={() => setOpen(false)}>{label}</Link>)}
+            {LINKS.map(([label, href]) => <Link href={href.startsWith("#") ? `/${href}` : href} key={label} onClick={() => setOpen(false)}>{label}</Link>)}
             <Link href="/#kontak" className="nav-cta" onClick={() => setOpen(false)}>Hubungi kami <span>↗</span></Link>
           </div>
         </nav>

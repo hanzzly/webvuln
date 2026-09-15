@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSiswaById } from "@/lib/siswa";
+import { getSiswaById, getKomentar } from "@/lib/siswa";
 import { SECURE_MODE } from "@/lib/config";
 import CommentSection from "@/components/CommentSection";
 
@@ -43,6 +43,13 @@ export default async function ProfilSiswa({ params }) {
     }
   }
   if (!s) notFound();
+
+  let komentarAwal = [];
+  try {
+    komentarAwal = await getKomentar(s.id);
+  } catch {
+    komentarAwal = [];
+  }
 
   const skills = String(s.skill || "")
     .split(",")
@@ -110,7 +117,7 @@ export default async function ProfilSiswa({ params }) {
         </article>
 
         {/* KOMENTAR — permukaan serangan XSS (stored) */}
-        <CommentSection siswaId={s.id} aman={SECURE_MODE} />
+        <CommentSection siswaId={s.id} aman={SECURE_MODE} komentarAwal={komentarAwal} />
       </div>
     </div>
   );

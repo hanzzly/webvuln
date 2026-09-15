@@ -62,29 +62,6 @@ export default async function DaftarSiswa({ searchParams }) {
             </button>
           </div>
         </form>
-
-        {SECURE_MODE ? (
-          <div className="mt-3 flex gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900">
-            <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
-            <p>
-              <strong>Pencarian aman:</strong> parameterized query / prepared statement memproses
-              kata kunci sebagai data sehingga tidak dapat memanipulasi SQL.
-            </p>
-          </div>
-        ) : (
-          <div className="mt-3 flex gap-2.5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-950">
-            <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-            <p>
-              <strong>Mode praktikum:</strong> kata kunci digabung langsung ke query SQL. Coba{" "}
-              <code className="rounded bg-white px-1 font-mono">&apos; OR 1=1 -- -</code> untuk
-              melihat SQL Injection. Baca penjelasan di{" "}
-              <Link href="/praktikum#a-sql-injection" className="font-semibold underline underline-offset-2">
-                halaman praktikum
-              </Link>
-              .
-            </p>
-          </div>
-        )}
       </section>
 
       {/* HASIL */}
@@ -93,9 +70,18 @@ export default async function DaftarSiswa({ searchParams }) {
         {!error && (
           <p className="mb-5 text-sm text-slate-600">
             {kata ? (
-              <>
-                Hasil untuk <strong className="text-slate-900">&ldquo;{kata}&rdquo;</strong> · {hasil.length} siswa
-              </>
+              SECURE_MODE ? (
+                <>
+                  Hasil untuk <strong className="text-slate-900">&ldquo;{kata}&rdquo;</strong> · {hasil.length} siswa
+                </>
+              ) : (
+                /* ⚠️ Mode rentan: Reflected XSS — parameter q dari URL dirender mentah */
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: `Hasil untuk &ldquo;<strong>${kata}</strong>&rdquo; · ${hasil.length} siswa`,
+                  }}
+                />
+              )
             ) : (
               <>Menampilkan semua siswa · {hasil.length} orang</>
             )}
@@ -108,11 +94,10 @@ export default async function DaftarSiswa({ searchParams }) {
               Terjadi kesalahan pada server. Coba kata kunci lain.
             </p>
           ) : (
-            /* ⚠️ Mode rentan: pesan error database ditampilkan — contoh nyata
-               kebocoran informasi yang membantu serangan error-based SQLi. */
+            /* Mode rentan: membocorkan pesan error database mentah */
             <div className="rounded-lg border border-red-200 bg-red-50 p-5">
               <p className="text-sm font-semibold text-red-900">
-                Query database gagal. Detail error ditampilkan karena mode praktikum aktif:
+                Database Error:
               </p>
               <pre className="mt-3 overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-slate-900 p-4 font-mono text-xs leading-5 text-red-100">
                 {error.message}
@@ -121,9 +106,17 @@ export default async function DaftarSiswa({ searchParams }) {
           ))}
 
         {!error && hasil.length === 0 && (
-          <p className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-600">
-            Tidak ada siswa yang cocok dengan kata kunci <strong>{kata}</strong>.
-          </p>
+          <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-600">
+            {SECURE_MODE ? (
+              <p>Tidak ada siswa yang cocok dengan kata kunci <strong>{kata}</strong>.</p>
+            ) : (
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: `Tidak ada siswa yang cocok dengan kata kunci: <strong>${kata}</strong>`,
+                }}
+              />
+            )}
+          </div>
         )}
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

@@ -12,13 +12,18 @@
  *   dieksekusi.
  */
 import { useEffect, useState } from "react";
+import { kirimKomentarAction, hapusKomentarAction } from "@/app/siswa/[id]/actions";
 
-export default function CommentSection({ siswaId, aman }) {
-  const [komentar, setKomentar] = useState([]);
+export default function CommentSection({ siswaId, aman, komentarAwal = [] }) {
+  const [komentar, setKomentar] = useState(komentarAwal);
   const [penulis, setPenulis] = useState("");
   const [isi, setIsi] = useState("");
   const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setKomentar(komentarAwal);
+  }, [komentarAwal]);
 
   async function muat() {
     try {
@@ -26,29 +31,24 @@ export default function CommentSection({ siswaId, aman }) {
       const json = await res.json();
       setKomentar(json.data ?? []);
     } catch {
-      setKomentar([]);
+      // fallback jika API tidak aktif
     } finally {
       setLoading(false);
     }
   }
 
-  useEffect(() => {
-    muat();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [siswaId]);
-
   async function kirim(e) {
     e.preventDefault();
     setStatus("Mengirim…");
     try {
-      const res = await fetch("/api/komentar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ siswa_id: siswaId, penulis, isi }),
-      });
-      const json = await res.json();
+      const formData = new FormData();
+      formData.append("siswa_id", String(siswaId));
+      formData.append("penulis", penulis);
+      formData.append("isi", isi);
+
+      const res = await kirimKomentarAction(formData);
       if (!res.ok) {
-        setStatus(json.error || "Gagal mengirim komentar.");
+        setStatus(res.error || "Gagal mengirim komentar.");
         return;
       }
       setPenulis("");
@@ -58,6 +58,12 @@ export default function CommentSection({ siswaId, aman }) {
     } catch {
       setStatus("Gagal mengirim komentar.");
     }
+  }
+
+  async function handleHapus(id) {
+    if (!confirm("Hapus komentar ini?")) return;
+    setKomentar((prev) => prev.filter((item) => item.id !== id));
+    await hapusKomentarAction(id, siswaId);
   }
 
   return (
@@ -74,31 +80,8 @@ export default function CommentSection({ siswaId, aman }) {
         </p>
       </header>
 
-      {!aman && (
-        <aside
-          aria-label="Informasi mode praktikum"
-          className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950"
-        >
-          <p>
-            <strong>Mode praktikum (rentan).</strong> Input komentar tidak divalidasi atau
-            disanitasi dan ditampilkan kembali sebagai HTML. Coba payload XSS berikut:
-          </p>
-          <code className="mt-2 block w-fit max-w-full overflow-x-auto rounded-md border border-amber-200 bg-white px-2 py-1 font-mono text-xs text-slate-800">
-            &lt;img src=x onerror=alert(&apos;XSS&apos;)&gt;
-          </code>
-        </aside>
-      )}
-      {aman && (
-        <aside
-          aria-label="Informasi mode aman"
-          className="mt-5 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm leading-6 text-blue-950"
-        >
-          <strong>Mode aman.</strong> Input divalidasi dan disanitasi di server, lalu output
-          di-encode sebagai teks sehingga payload XSS tidak dieksekusi.
-        </aside>
-      )}
-
-      <form onSubmit={kirim} className="mt-6 space-y-4">
+      <form action={kirimKomentarAction} onSubmit={kirim} className="mt-6 space-y-4">
+        <input type="hidden" name="siswa_id" value={siswaId} />
         <div className="grid gap-4 sm:grid-cols-[15rem_minmax(0,1fr)]">
           <label className="block text-sm font-semibold text-[var(--foreground)]">
             Nama
@@ -164,9 +147,19 @@ export default function CommentSection({ siswaId, aman }) {
                   <p className="text-sm font-semibold text-[var(--primary)]">
                     {String(k.penulis ?? "")}
                   </p>
-                  <time className="text-xs text-[var(--muted)]">
-                    {k.created_at ? new Date(k.created_at).toLocaleString("id-ID") : ""}
-                  </time>
+                  <div className="flex items-center gap-3">
+                    <time className="text-xs text-[var(--muted)]">
+                      {k.created_at ? new Date(k.created_at).toLocaleString("id-ID") : ""}
+                    </time>
+                    <button
+                      type="button"
+                      onClick={() => handleHapus(k.id)}
+                      className="text-xs font-medium text-red-500 hover:text-red-700 hover:underline"
+                      title="Hapus komentar ini"
+                    >
+                      Hapus
+                    </button>
+                  </div>
                 </div>
                 {aman ? (
                   <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-[var(--foreground)]">

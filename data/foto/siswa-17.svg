@@ -3,9 +3,9 @@
   <rect x="36" y="36" width="408" height="408" rx="18" fill="#ffffff" stroke="#d8e0e8" stroke-width="2"/>
   <circle cx="240" cy="204" r="112" fill="#58647a"/>
   <text x="240" y="244" font-family="Arial, sans-serif" font-size="112" font-weight="700"
-        fill="#ffffff" text-anchor="middle" letter-spacing="2">OD</text>
+        fill="#ffffff" text-anchor="middle" letter-spacing="2">IA</text>
   <text x="240" y="354" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="#1f2937"
-        text-anchor="middle">Viani</text>
+        text-anchor="middle">Ivan</text>
   <text x="240" y="397" font-family="Arial, sans-serif" font-size="20" fill="#64748b"
         text-anchor="middle">XI TKJ 3</text>
 </svg>

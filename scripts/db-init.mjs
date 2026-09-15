@@ -14,7 +14,9 @@ const DB_NAME = process.env.DB_NAME || "db_kelas_xitkj3";
 async function main() {
   const rootDir = process.cwd();
   const schema = fs.readFileSync(path.join(rootDir, "database", "schema.sql"), "utf8");
-  const data = JSON.parse(fs.readFileSync(path.join(rootDir, "database", "siswa-data.json"), "utf8"));
+  let rawData = fs.readFileSync(path.join(rootDir, "database", "siswa-data.json"), "utf8");
+  if (rawData.charCodeAt(0) === 0xfeff) rawData = rawData.slice(1);
+  const data = JSON.parse(rawData);
 
   const conn = await mysql.createConnection({
     host: process.env.DB_HOST || "127.0.0.1",
@@ -32,6 +34,8 @@ async function main() {
   console.log("→ Reset & isi data siswa ...");
   await conn.query("DELETE FROM komentar");
   await conn.query("DELETE FROM siswa");
+  await conn.query("ALTER TABLE siswa AUTO_INCREMENT = 1");
+  await conn.query("ALTER TABLE komentar AUTO_INCREMENT = 1");
   for (const s of data.siswa) {
     await conn.execute(
       `INSERT INTO siswa

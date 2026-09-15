@@ -84,11 +84,16 @@ export async function GET(request) {
   try {
     const data = await fs.readFile(filePath);
     const ext = path.extname(filePath).toLowerCase();
+    const contentType =
+      MIME[ext] || (SECURE_MODE ? "application/octet-stream" : "text/plain; charset=utf-8");
+    const filename = path.basename(filePath) || "file";
+
     return new NextResponse(data, {
       status: 200,
       headers: {
-        "Content-Type": MIME[ext] || "application/octet-stream",
-        "Cache-Control": "public, max-age=60",
+        "Content-Type": contentType,
+        "Content-Disposition": `inline; filename="${filename}"`,
+        "Cache-Control": "no-store, no-cache, must-revalidate",
       },
     });
   } catch {
