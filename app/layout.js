@@ -1,14 +1,11 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { KELAS, SCHOOL_NAME } from "@/lib/config";
+import Link from "next/link";
 
 export const metadata = {
-  title: {
-    default: "XI TKJ 3 — Profil Kelas",
-    template: "%s | XI TKJ 3",
-  },
+  title: "XI TKJ 3 — Belajar, Terhubung, Berkarya",
   description:
-    "Profil digital kelas XI TKJ 3 yang memuat daftar siswa, keahlian, minat, dan praktikum keamanan aplikasi web.",
+    "Website kelas XI TKJ 3—ruang belajar, kolaborasi, kegiatan, dan karya siswa Teknik Komputer dan Jaringan.",
 };
 
 export default function RootLayout({ children }) {
@@ -19,17 +16,31 @@ export default function RootLayout({ children }) {
           Lewati ke konten utama
         </a>
         <Navbar />
-        <main id="konten-utama" className="flex-1">{children}</main>
-        <footer className="mt-16 border-t border-slate-200 bg-white py-8">
-          <div className="page-shell flex flex-col gap-2 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="font-semibold text-slate-800">{KELAS}</p>
-              <p className="mt-0.5">{SCHOOL_NAME}</p>
+        <main id="konten-utama">{children}</main>
+        <footer className="site-footer">
+          <div className="section-shell footer-grid">
+            <div className="footer-about">
+              <Link href="/#beranda" className="brand footer-brand">
+                <span className="brand-mark">XI</span>
+                <span><strong>TKJ 3</strong><small>learn · connect · create</small></span>
+              </Link>
+              <p>Rumah digital kelas XI TKJ 3 untuk belajar, berbagi, dan merakit masa depan bersama.</p>
             </div>
-            <p className="max-w-md sm:text-right">
-              Profil kelas dan media belajar keamanan aplikasi web.
-            </p>
+            <div className="footer-column">
+              <h3>Jelajahi</h3>
+              <Link href="/#tentang">Tentang kami</Link><Link href="/#program">Program</Link><Link href="/#kegiatan">Kegiatan</Link><Link href="/#faq">FAQ</Link>
+            </div>
+            <div className="footer-column">
+              <h3>Kontak</h3>
+              <a href="mailto:xitkj3@sekolah.sch.id">xitkj3@sekolah.sch.id</a><span>Lab Komputer 3</span><span>Senin—Jumat, 07.00—15.00</span>
+            </div>
+            <div className="footer-column">
+              <h3>Ikuti cerita kami</h3>
+              <div className="social-links"><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="YouTube">yt</a><a href="#" aria-label="TikTok">tk</a></div>
+              <p className="footer-note">Karya kecil. Cerita besar.</p>
+            </div>
           </div>
+          <div className="section-shell footer-bottom"><span>© 2026 XI TKJ 3. Dibuat bersama, dengan rasa ingin tahu.</span><Link href="/#beranda">Kembali ke awal ↑</Link></div>
         </footer>
       </body>
     </html>
